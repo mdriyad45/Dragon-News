@@ -1,9 +1,13 @@
+import { useLoaderData } from "react-router-dom";
 import Header from "../Shared/Header/Header";
 import LeftSideNav from "../Shared/LeftSideNav/LeftSideNav";
 import Navbar from "../Shared/Navbar/Navbar";
 import RightSideNav from "../Shared/RightSideNav/RightSideNav";
+import NewsCard from "../../Components/NewsCard/NewsCard";
 
 const Home = () => {
+    const news = useLoaderData();
+    console.log(news)
     return (
         <div>
             <Header></Header>
@@ -13,9 +17,11 @@ const Home = () => {
                     <LeftSideNav></LeftSideNav>
                 </div>
                 <div className=" md:col-span-2">
-                    News Cooming soon
+                    {
+                        news.map(aNews => <NewsCard key={aNews.id} news={aNews}></NewsCard>)
+                    }
                 </div>
-                <div >
+                <div className=" ">
                     <RightSideNav></RightSideNav>
                 </div>
             </div>          

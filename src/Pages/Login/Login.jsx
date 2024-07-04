@@ -1,14 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Login = () => {
+    const {signIn} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const handleLoginForm= (e)=>{
         e.preventDefault();
         const form = new FormData(e.currentTarget);
         const email = form.get("email");
         const password = form.get("password");
         
-        console.log(email, password)
+        signIn(email,password)
+        .then(result =>{
+            e.target.reset();
+
+            //navigate after login
+            navigate(location?.state? location : '/')
+            console.log(result.user)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
 
     }
   return (
@@ -49,7 +65,7 @@ const Login = () => {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
+            <button  className="btn btn-primary">Login</button>
           </div>
         </form>
     <p className="text-center mt-5">Don&#39;t have an account? <Link className="text-blue-500 ml-2 hover:text-blue-800 font-bold" to={'/register'}>Register</Link></p>
