@@ -12,7 +12,7 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "context": "^3.0.29",
-    "firebase": "^10.12.2",
+    "firebase": "^10.12.3",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "moment": "^2.30.1",
